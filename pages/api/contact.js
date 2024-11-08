@@ -17,9 +17,7 @@ export default async function handler(req, res) {
 
     let client;
     try {
-      client = await MongoClient.connect(
-        "mongodb+srv://hntn32:mV9IMeX5zgi4fxzT@cluster0.4tzpr.mongodb.net/nevia-blog?retryWrites=true&w=majority&appName=Cluster0"
-      );
+      client = await MongoClient.connect(process.env.MONGODB_URI);
     } catch (error) {
       res.status(500).json({ message: "데이터베이스 연결 실패" });
       return;
