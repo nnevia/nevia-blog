@@ -1,26 +1,79 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./contact-form.module.css";
+import Notification from "../ui/notification";
+
+async function sendContactData(contactDetails) {
+  const response = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(contactDetails),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "문제가 생겼어요 !");
+  }
+}
 
 export default function ContactForm() {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredName, setEnteredName] = useState("");
   const [enteredMessage, setEnteredMessage] = useState("");
+  const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
+  const [requestError, setRequestError] = useState();
 
-  function sendMessageHandler(event) {
+  useEffect(() => {
+    if (requestStatus === "success" || requestStatus === "error") {
+      const timer = setTimeout(() => {
+        setRequestStatus(null);
+        setRequestError(null);
+      }, 3000); // 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [requestStatus]);
+
+  async function sendMessageHandler(event) {
     event.preventDefault();
 
-    fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    setRequestStatus("pending");
+
+    try {
+      await sendContactData({
         email: enteredEmail,
         name: enteredName,
         message: enteredMessage,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data.message));
-    return;
+      });
+      setRequestStatus("success");
+      setEnteredEmail("");
+      setEnteredMessage("");
+      setEnteredName("");
+    } catch (error) {
+      setRequestError(error.message);
+      setRequestStatus("error");
+    }
+  }
+
+  let notification;
+  if (requestStatus === "pending") {
+    notification = {
+      status: "pending",
+      title: "메시지 전송 중...",
+      message: "메시지 전송 중",
+    };
+  }
+  if (requestStatus === "success") {
+    notification = {
+      status: "success",
+      title: "성공!",
+      message: "메시지가 성공적으로 전송되었습니다!",
+    };
+  }
+  if (requestStatus === "error") {
+    notification = {
+      status: "error",
+      title: "실패",
+      message: requestError,
+    };
   }
   return (
     <section className={classes.contact}>
@@ -61,6 +114,9 @@ export default function ContactForm() {
           <button>Send Message</button>
         </div>
       </form>
+      {notification && (
+        <Notification status={notification.status} title={notification.title} message={notification.message} />
+      )}
     </section>
   );
 }
