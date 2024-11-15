@@ -65,7 +65,7 @@ export default function ContactForm() {
     notification = {
       status: "success",
       title: "성공!",
-      message: "메시지가 성공적으로 전송되었습니다!",
+      message: "메시지가 성공적으로 전송되었습니다 ! !",
     };
   }
   if (requestStatus === "error") {
