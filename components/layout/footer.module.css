@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.info {
+  font-size: 13px;
+}
+
+.info strong {
+  /* color: #0070f3;   */
+  color: var(--color-primary-700);
+}
+
+.icons {
+  display: flex;
+  gap: 11px;
+}
+
+.icon {
+  font-size: 20px;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #0070f3; /* 아이콘 hover 시 강조 색상 */
+}
