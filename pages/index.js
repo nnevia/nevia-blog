@@ -24,6 +24,3 @@ export function getStaticProps() {
     revalidate: 600,
   };
 }
-
-// 1 hero 페이지 생성 (자기소개)
-// 2 더미 콘텐츠 생성
