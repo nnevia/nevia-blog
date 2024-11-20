@@ -2,6 +2,43 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   background-color: var(--color-grey-800);
   text-align: center;
+  border-radius: 19px; /* 둥근 모서리 추가 */
+  overflow: hidden;
+  /* 내부 콘텐츠가 테두리를 넘어가지 않도록 */
+}
+.tag {
+  display: inline-block; /* 한 줄에 표시 */
+  background-color: var(--color-grey-900); /* 태그 배경색 */
+  color: white; /* 텍스트 색상 */
+  padding: 0.5rem 1rem; /* 내부 여백 */
+  border-radius: 0.5rem; /* 둥근 모서리 */
+  font-size: 0.7rem; /* 텍스트 크기 */
+  font-weight: 500; /* 텍스트 굵기 */
+  margin: 0.5rem; /* 태그 간의 간격 */
+  transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+  position: relative;
+}
+
+.tag::after {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 14px solid var(--color-grey-900); /* 책갈피 끝 모양 */
+  transition: border-top-color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: var(--color-grey-600); /* hover 시 배경색 변화 */
+}
+
+.tag:hover::after {
+  border-top-color: var(--color-grey-600); /* ::after의 border-top 색상도 변화 */
 }
 
 .post a {

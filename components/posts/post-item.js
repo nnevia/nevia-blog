@@ -3,7 +3,16 @@ import classes from "./post-item.module.css";
 import Image from "next/image";
 
 export default function PostItem(props) {
-  const { title, image, excerpt, date, slug } = props.post;
+  const { title, image, excerpt, date, slug, tags } = props.post;
+  let formattedtags;
+  if (tags) {
+    const tagList = tags.split(",");
+    formattedtags = tagList.map((tag) => (
+      <span key={tag} className={classes.tag}>
+        {tag}
+      </span>
+    ));
+  }
   const formattedDate = new Date(date).toLocaleDateString("ko-KR", {
     day: "numeric",
     month: "long",
@@ -13,7 +22,7 @@ export default function PostItem(props) {
   const linkPath = `/posts/${slug}`;
 
   return (
-    <li className={classes.post}>
+    <li className={`${classes.post}`}>
       <Link href={linkPath}>
         <div className={classes.image}>
           <Image src={imagePath} alt={title} width={300} height={200} layout='responsive' />
@@ -21,6 +30,7 @@ export default function PostItem(props) {
         <div className={classes.content}>
           <h3>{title}</h3>
           <time>{formattedDate}</time>
+          {formattedtags ? <h4>{formattedtags}</h4> : null}
           <p>{excerpt}</p>
         </div>
       </Link>

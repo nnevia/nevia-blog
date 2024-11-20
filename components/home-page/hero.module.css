@@ -1,6 +1,7 @@
 .hero {
   text-align: center;
-  background-image: linear-gradient(to bottom, var(--color-primary-100), var(--color-grey-800));
+  background-image: linear-gradient(to bottom, var(--color-secondary), var(--color-secondary));
+  /* 메인페이지 배경 색 수정 */
   padding: var(--size-8) 0;
 }
 
