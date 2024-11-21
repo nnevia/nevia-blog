@@ -49,6 +49,7 @@ export default function PostContent(props) {
   return (
     <article className={`${classes.content}`}>
       <PostHeader title={post.title} image={imagePath} />
+      {/* 이미지 스켈레톤 추가 자리 */}
       <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
     </article>
   );
