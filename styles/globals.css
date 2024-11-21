@@ -3,7 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 * {
   box-sizing: border-box;
 }
@@ -49,8 +48,9 @@ body {
   --size-40: 10rem;
 
   margin: 0;
-  background-color: var(--color-grey-500);
-  color: #252525;
+  /* 기본 배경 변경 */
+  background-color: var(--color-secondary);
+  color: #b1b0b0;
   font-family: "Roboto", sans-serif;
 }
 
@@ -67,4 +67,27 @@ a {
 button {
   font: inherit;
   cursor: pointer;
+}
+
+/* styles/globals.css */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
 }

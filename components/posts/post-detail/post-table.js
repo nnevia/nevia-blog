@@ -14,7 +14,6 @@ export default function PostTable() {
     }));
     setHeadings(headingsData);
   }, []);
-  console.log(headings);
 
   return (
     <nav aria-label='Table of contents' style={{ padding: "1rem", border: "1px solid #ddd" }}>
