@@ -9,7 +9,7 @@ export default function AllPostsPage(props) {
         <title>Nevia Blog - All Posts</title>
         <meta name='viewport' content='A list' />
       </Head>
-      <AllPosts posts={props.posts} />;
+      <AllPosts posts={props.posts} />
     </>
   );
 }

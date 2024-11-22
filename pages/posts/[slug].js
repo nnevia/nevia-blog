@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import PostContent from "../../components/posts/post-detail/post-content";
-import { getPostData, getpostFiles } from "../../lib/post-util";
+import { addIdsToHeaders, getPostData, getpostFiles } from "../../lib/post-util";
 import Head from "next/head";
-import PostTable from "../../components/posts/post-detail/post-table";
+import TOC from "../../components/posts/post-detail/post-table";
 
 export default function PostDetailPage(props) {
   // const router = useRouter();
@@ -14,8 +14,7 @@ export default function PostDetailPage(props) {
         <title>{props.post.title}</title>
         <meta name='description' content={props.post.excerpt} />
       </Head>
-      <PostContent post={props.post} />
-      <PostTable />
+      <PostContent post={props.content} content={props.content} />
     </>
   );
 }
@@ -34,14 +33,15 @@ export function getStaticPaths() {
   };
 }
 
-export function getStaticProps(context) {
+export async function getStaticProps(context) {
   const { params } = context;
   const { slug } = params;
   const postData = getPostData(slug);
-
+  const content = await addIdsToHeaders(postData);
   return {
     props: {
       post: postData,
+      content,
     },
     revalidate: 600,
   };

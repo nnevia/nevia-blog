@@ -7,13 +7,15 @@ import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
+import TOC from "./post-table";
+import rehypeRaw from "rehype-raw";
 
 SyntaxHighlighter.registerLanguage("js", js);
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("python", python);
 
 export default function PostContent(props) {
-  const { post } = props;
+  const { post, content } = props;
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
   const customRenderers = {
     // img(image) {
@@ -21,7 +23,7 @@ export default function PostContent(props) {
     // },
     p(paragraph) {
       const { node } = paragraph;
-      if (node.children[0].tagName === "img") {
+      if (node.children && node.children[0] && node.children[0].tagName === "img") {
         const image = node.children[0];
 
         return (
@@ -36,6 +38,10 @@ export default function PostContent(props) {
         );
       }
 
+      if (node.children && node.children[0] && node.children[0].tagName === "code") {
+        return <>{paragraph.children}</>; // <code>를 감싸지 않도록 처리
+      }
+
       return <p>{paragraph.children}</p>;
     },
 
@@ -47,10 +53,15 @@ export default function PostContent(props) {
   };
 
   return (
-    <article className={`${classes.content}`}>
-      <PostHeader title={post.title} image={imagePath} />
-      {/* 이미지 스켈레톤 추가 자리 */}
-      <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
-    </article>
+    <>
+      <article className={`${classes.content}`}>
+        <PostHeader title={post.title} image={imagePath} />
+        {/* 이미지 스켈레톤 추가 자리 */}
+        <ReactMarkdown components={customRenderers} rehypePlugins={[rehypeRaw]}>
+          {post.content}
+        </ReactMarkdown>
+      </article>
+      <TOC content={content} />
+    </>
   );
 }
