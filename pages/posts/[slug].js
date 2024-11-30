@@ -1,13 +1,8 @@
-import { useRouter } from "next/router";
 import PostContent from "../../components/posts/post-detail/post-content";
 import { addIdsToHeaders, getPostData, getpostFiles } from "../../lib/post-util";
 import Head from "next/head";
-import TOC from "../../components/posts/post-detail/post-table";
 
 export default function PostDetailPage(props) {
-  // const router = useRouter();
-  // const { slug } = router.query;
-
   return (
     <>
       <Head>

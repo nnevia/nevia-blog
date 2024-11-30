@@ -1,0 +1,23 @@
+.tocContainer {
+  padding: 20px;
+}
+
+.tocTitle {
+  margin-bottom: 16px;
+}
+
+.tocItem {
+  margin: 8px 20;
+  transition: all 0.2s ease;
+}
+
+.tocLink {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 4px 0;
+}
+
+.tocLink:hover {
+  color: #666;
+}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import classes from "./post-table.module.css";
 
 export default function TOC({ content }) {
-  const [activeId, setActiveId] = useState(""); // 현재 활성화된 섹션 ID
+  const [activeId, setActiveId] = useState("");
 
   function getHeadings(source) {
     const regex = /<h([1-3])[^>]*id=["']?([^"'>]*)["']?[^>]*>(.*?)<\/h[1-3]>/gi;
@@ -9,9 +10,9 @@ export default function TOC({ content }) {
     let match;
     while ((match = regex.exec(source)) !== null) {
       matches.push({
-        text: match[3], // 헤더 텍스트
-        link: match[2], // id 값
-        indent: parseInt(match[1]), // 헤더 레벨
+        text: match[3],
+        link: match[2],
+        indent: parseInt(match[1]),
       });
     }
     return matches;
@@ -24,14 +25,13 @@ export default function TOC({ content }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id); // 활성화된 섹션의 ID 설정
+            setActiveId(entry.target.id);
           }
         });
       },
-      { rootMargin: "0px 0px -50% 0px", threshold: 1.0 } // 섹션의 중앙 근처에 도달했을 때 활성화
+      { rootMargin: "0px 0px -50% 10px", threshold: 1.0 }
     );
 
-    // 각 헤더를 Observer에 등록
     HeadingArr.forEach((heading) => {
       const element = document.getElementById(heading.link);
       if (element) {
@@ -39,25 +39,38 @@ export default function TOC({ content }) {
       }
     });
 
-    // Observer 정리
     return () => {
       observer.disconnect();
     };
   }, [HeadingArr]);
 
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    const href = e.target.getAttribute("href");
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div>
-      <h2>목차</h2>
       {HeadingArr.map((heading, index) => (
         <div
           key={index}
+          className={classes.tocItem}
           style={{
-            paddingLeft: `${(heading.indent - 1) * 10}px`,
-            fontWeight: activeId === heading.link ? "bold" : "normal", // 활성화된 항목 강조
-            color: activeId === heading.link ? "blue" : "black",
+            paddingLeft: `${(heading.indent - 1) * 20}px`,
           }}
         >
-          <a href={`#${heading.link}`} style={{ textDecoration: "none" }}>
+          <a
+            href={`#${heading.link}`}
+            onClick={handleLinkClick}
+            className={`${classes.tocLink} ${activeId === heading.link ? classes.active : ""}`}
+          >
             {heading.text}
           </a>
         </div>

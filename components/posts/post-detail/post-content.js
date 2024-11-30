@@ -7,61 +7,60 @@ import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
+import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import TOC from "./post-table";
-import rehypeRaw from "rehype-raw";
-
+import dynamic from "next/dynamic";
 SyntaxHighlighter.registerLanguage("js", js);
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("python", python);
+SyntaxHighlighter.registerLanguage("tsx", tsx);
+
+const Markdown = dynamic(() => import("markdown-to-jsx"), { ssr: false });
 
 export default function PostContent(props) {
   const { post, content } = props;
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
+
   const customRenderers = {
-    // img(image) {
-    //   return <Image src={`/images/posts/${post.slug}/${image.src}`} alt={image.alt} width={600} height={300} />;
-    // },
-    p(paragraph) {
-      const { node } = paragraph;
-      if (node.children && node.children[0] && node.children[0].tagName === "img") {
-        const image = node.children[0];
-
-        return (
-          <div className={classes.image}>
-            <Image
-              src={`/images/posts/${post.slug}/${image.properties.src}`}
-              alt={image.alt}
-              width={600}
-              height={300}
-            />
-          </div>
-        );
+    // img: ({ alt, src }) => (
+    //   <div className={classes.image}>
+    //     <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />
+    //   </div>
+    // ),
+    code: ({ children, className }) => {
+      if (!className) {
+        return <code>{children}</code>;
       }
+      const codeString = Array.isArray(children) ? children.join("\n") : children.toString();
+      const language = className.replace("language-", "");
 
-      if (node.children && node.children[0] && node.children[0].tagName === "code") {
-        return <>{paragraph.children}</>; // <code>를 감싸지 않도록 처리
-      }
-
-      return <p>{paragraph.children}</p>;
-    },
-
-    code(code) {
-      const { className, children } = code;
-      const language = className.split("-")[1];
-      return <SyntaxHighlighter style={atomDark} language={language} children={children} />;
+      return (
+        <SyntaxHighlighter style={atomDark} language={language || "text"}>
+          {codeString}
+        </SyntaxHighlighter>
+      );
     },
   };
 
   return (
-    <>
-      <article className={`${classes.content}`}>
+    <div className={classes.container}>
+      <article className={classes.content}>
         <PostHeader title={post.title} image={imagePath} />
         {/* 이미지 스켈레톤 추가 자리 */}
-        <ReactMarkdown components={customRenderers} rehypePlugins={[rehypeRaw]}>
-          {post.content}
-        </ReactMarkdown>
+        <div className={classes.contents}>
+          <Markdown
+            options={{
+              overrides: customRenderers,
+              forceBlock: true,
+            }}
+          >
+            {post.content}
+          </Markdown>
+        </div>
       </article>
-      <TOC content={content} />
-    </>
+      <div className={classes.tocWrapper}>
+        <TOC content={content} />
+      </div>
+    </div>
   );
 }

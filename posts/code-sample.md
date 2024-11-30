@@ -21,6 +21,7 @@ const num1, num2, sum;
 num1 = prompt("Enter first number");
 num2 = prompt("Enter second number");
 sum = parseInt(num1) + parseInt(num2); // "+" means "add"
+
 alert("Sum = " + sum); // "+" means combine into a string
 ```
 
@@ -34,5 +35,5 @@ def fib():
         a, b = b, a + b    # a will now be 1, and b will also be 1, (0 + 1)
 
 for index, fibonacci_number in zip(range(10), fib()):
-     print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
+    print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
 ```

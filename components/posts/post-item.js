@@ -6,7 +6,7 @@ export default function PostItem(props) {
   const { title, image, excerpt, date, slug, tags } = props.post;
   let formattedtags;
   if (tags) {
-    const tagList = tags.split(",");
+    const tagList = tags.includes(",") ? tags.split(",") : [tags];
     formattedtags = tagList.map((tag) => (
       <span key={tag} className={classes.tag}>
         {tag}
