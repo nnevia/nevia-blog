@@ -1,6 +1,5 @@
 import PostHeader from "./post-header";
 import classes from "./post-content.module.css";
-import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
@@ -22,11 +21,11 @@ export default function PostContent(props) {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   const customRenderers = {
-    // img: ({ alt, src }) => (
-    //   <div className={classes.image}>
-    //     <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />
-    //   </div>
-    // ),
+    img: ({ alt, src }) => (
+      <div className={classes.image}>
+        <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />
+      </div>
+    ),
     code: ({ children, className }) => {
       if (!className) {
         return <code>{children}</code>;
@@ -38,6 +37,13 @@ export default function PostContent(props) {
         <SyntaxHighlighter style={atomDark} language={language || "text"}>
           {codeString}
         </SyntaxHighlighter>
+      );
+    },
+    Callout: ({ children, type }) => {
+      return (
+        <div className={classes.callout} data-type={type}>
+          <div className={classes.calloutContent}>{children}</div>
+        </div>
       );
     },
   };

@@ -77,6 +77,34 @@
   color: var(--color-grey-200);
 }
 
+.callout {
+  margin: var(--size-4) 0;
+  padding: var(--size-4);
+  border-radius: 4px;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.callout[data-type="danger"] {
+  background-color: rgba(220, 38, 38, 0.1);
+  border-left-color: rgb(220, 38, 38);
+}
+
+.callout[data-type="info"] {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-left-color: rgb(59, 130, 246);
+}
+
+.calloutContent {
+  margin: 0;
+}
+
+.calloutContent strong {
+  display: block;
+  margin-bottom: var(--size-2);
+  color: inherit;
+}
+
 @media (min-width: 768px) {
   .content {
     padding: var(--size-8);
@@ -109,7 +137,7 @@
 .tocWrapper {
   border-left: 4px solid var(--color-primary-300);
   position: sticky;
-  top: 12rem;
+  top: 9rem;
   height: fit-content;
   width: 250px;
   margin-top: var(--size-8);
