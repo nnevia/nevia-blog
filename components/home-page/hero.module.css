@@ -159,3 +159,18 @@
     height: 250px;
   }
 }
+
+.contactButton {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-grey-300);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contactButton:hover {
+  color: var(--color-primary-300);
+  transform: translateY(-3px);
+}

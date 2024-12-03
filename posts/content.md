@@ -9,7 +9,7 @@ isFeatured: true
 
 ## Icona
 
-`Icona(이코나)`에 대해서 당근 테크밋업 때 발표를 했다.
+`Icona`에 대해서 당근 테크밋업 때 발표를 했다.
 
 `당근 피그마에 존재하는 아이콘들을 어떻게 하면 개발단으로 옮길까` 에 대한 물음이 시작이었다.
 
@@ -106,9 +106,7 @@ isFeatured: true
 
 ### icon 파일 경로 커스텀
 
-<Callout type="danger">
-**AS IS**: 아이콘 파일 경로를 커스텀할 수 없다.
-</Callout>
+'**AS IS**: 아이콘 파일 경로를 커스텀할 수 없다.'
 
 <Callout type="info">
 **TO BE**: 아이콘 파일 경로를 커스텀할 수 있다.
@@ -256,7 +254,7 @@ const reactConfig: ReactConfig = {
 그래서 `svgr`의 `template` 함수를 한번 더 감싸서 커스텀 템플릿을 만들었다.
 그리고 더이상은 `svgr`의 `template`이 아니기 때문에 `svgrConfig`에서 빼내서 최상위 `prop`으로 빼냈다.
 
-```js
+```tsx
 import { generate, type ReactConfig } from "@icona/generator";
 const reactConfig: ReactConfig = {
   path: "packages/react/src",
@@ -265,8 +263,7 @@ const reactConfig: ReactConfig = {
       const { tpl } = context;
       const { metadatas, png, name } = iconData;
       const componentName = changeCase.pascalCase(name);
-      const comment =
-      `return tpl
+      const comment = `return tpl
         ${variables.imports};
 
         const Icon = (

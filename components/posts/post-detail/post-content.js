@@ -9,6 +9,7 @@ import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import TOC from "./post-table";
 import dynamic from "next/dynamic";
+
 SyntaxHighlighter.registerLanguage("js", js);
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("python", python);
@@ -27,24 +28,35 @@ export default function PostContent(props) {
       </div>
     ),
     code: ({ children, className }) => {
-      if (!className) {
-        return <code>{children}</code>;
-      }
-      const codeString = Array.isArray(children) ? children.join("\n") : children.toString();
-      const language = className.replace("language-", "");
+      if (className) {
+        const codeString = Array.isArray(children) ? children.join("\n") : children.toString();
+        const language = className.replace("language-", "");
 
-      return (
-        <SyntaxHighlighter style={atomDark} language={language || "text"}>
-          {codeString}
-        </SyntaxHighlighter>
-      );
-    },
-    Callout: ({ children, type }) => {
-      return (
-        <div className={classes.callout} data-type={type}>
-          <div className={classes.calloutContent}>{children}</div>
-        </div>
-      );
+        return (
+          <div>
+            <div className={classes.codeHeader}>
+              <span className={classes.language}>{language}</span>
+            </div>
+            <SyntaxHighlighter
+              style={atomDark}
+              language={language || "text"}
+              showLineNumbers={true}
+              wrapLines={true}
+              lineNumberStyle={{
+                minWidth: "2.5em",
+                paddingRight: "1em",
+                color: "#666",
+                borderRight: "1px solid #333",
+                marginRight: "1em",
+              }}
+            >
+              {codeString}
+            </SyntaxHighlighter>
+          </div>
+        );
+      } else {
+        return <span className={classes.inlineCode}>{children}</span>;
+      }
     },
   };
 
