@@ -1,7 +1,7 @@
 ---
-title: "아이콘 피그마 배포 시스템, Icona의 남은 과제들 (부제. 테크밋업 발표에서 하지 못한 얘기들)"
+title: "Icona의 남은 과제들"
 date: "2024-09-08"
-excerpt: 테크밋업 발표에서 하지 못한 Icona의 남은 과제들에 대한 이야기에 대해서 적어보았다.
+excerpt: (부제. 테크밋업 발표에서 하지 못한 얘기들) 테크밋업 발표에서 하지 못한 Icona의 남은 과제들에 대한 이야기에 대해서 적어보았다.
 tags: "development, icon"
 image: "content1.png"
 isFeatured: true

@@ -10,7 +10,7 @@
 }
 
 .header h1 {
-  font-size: var(--size-5);
+  font-size: var(--size-8);
   margin: 0;
   line-height: initial;
   text-align: center;
@@ -30,7 +30,8 @@
   }
 
   .header h1 {
-    font-size: var(--size-8);
+    font-size: var(--size-10);
+    font-weight: 500;
     text-align: left;
   }
 }

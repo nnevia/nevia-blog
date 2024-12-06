@@ -22,16 +22,18 @@ export default function PostItem(props) {
   const linkPath = `/posts/${slug}`;
 
   return (
-    <li className={`${classes.post}`}>
+    <li className={classes.post}>
       <Link href={linkPath}>
         <div className={classes.image}>
           <Image src={imagePath} alt={title} width={300} height={200} layout='responsive' />
+          {formattedtags ? <div className={classes.tags}>{formattedtags}</div> : null}
+          <div className={classes.overlayContent}>
+            <time>{formattedDate}</time>
+            <p>{excerpt}</p>
+          </div>
         </div>
         <div className={classes.content}>
           <h3>{title}</h3>
-          <time>{formattedDate}</time>
-          {formattedtags ? <h4>{formattedtags}</h4> : null}
-          <p>{excerpt}</p>
         </div>
       </Link>
     </li>

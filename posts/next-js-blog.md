@@ -2,7 +2,7 @@
 title: NEXT.JS@14 App Router 블로그 제작 후기
 excerpt: 블로그 재설계 이유와 후기
 date: "2024-02-01"
-tags: "next.js"
+tags: "next"
 image: image.png
 isFeatured: true
 ---
@@ -183,7 +183,7 @@ app/
 - 마크다운 글을 firebase에 저장하여 각종 라이브러리로 크게 변환하지 않고, next-contentlayer를 이용해 간편한 설정만으로 마크다운 파일을 html 태그로 parsing 할 수 있었습니다.
 - 댓글은 간단한 설정으로 구현할수있고, 광고 기능이 없는 giscus로 선택했습니다.
 
-### 마치며
+## 마치며
 
 블로그의 디자인, 설계, 개발도 중요하겠지만 가장 중요한 본질은 글입니다.\
 예전 블로그는 널리 알려져 있는 단순한 문제해결이나 기본적인 개념을 노트필기 하듯이 사용했습니다.\
