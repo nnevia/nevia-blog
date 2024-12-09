@@ -26,7 +26,7 @@ export default function ContactForm() {
       const timer = setTimeout(() => {
         setRequestStatus(null);
         setRequestError(null);
-      }, 3000); // 3 seconds
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
