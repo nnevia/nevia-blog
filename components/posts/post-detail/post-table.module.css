@@ -15,7 +15,8 @@
   text-decoration: none;
   transition: color 0.2s ease;
   display: block;
-  padding: 4px 0;
+  padding: 3px 0;
+  font-weight: 600;
 }
 
 .tocLink:hover {

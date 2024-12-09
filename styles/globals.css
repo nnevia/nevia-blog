@@ -52,10 +52,8 @@ body {
   --size-40: 10rem;
 
   margin: 0;
-  /* 기본 배경 변경 */
   background-color: var(--color-secondary);
   color: #b1b0b0;
-  /* font-family: "Roboto", sans-serif; */
 }
 
 h1 {
