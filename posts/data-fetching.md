@@ -1,6 +1,6 @@
 ---
-title: Next.js의 데이터 페칭
-excerpt: nextjs의 정적생성과 동정생성에 대해
+title: "Next의 데이터 페칭"
+excerpt: "nextjs의 정적생성과 동정생성에 대해"
 date: "2024-10-23"
 tags: "next"
 image: getstaticprops.jpg

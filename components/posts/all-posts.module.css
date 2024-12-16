@@ -1,7 +1,8 @@
 .posts {
-  width: 90%;
+  width: 100%;
   max-width: 80rem;
   margin: var(--size-8) auto;
+  min-height: calc(100vh - 220px);
 }
 
 .posts h1 {

@@ -3,14 +3,15 @@ import classes from "./post-table.module.css";
 
 export default function TOC({ content }) {
   const [activeId, setActiveId] = useState("");
-
+  console.log(content.content);
   function getHeadings(source) {
     const regex = /<h([1-3])[^>]*id=["']?([^"'>]*)["']?[^>]*>(.*?)<\/h[1-3]>/gi;
     const matches = [];
     let match;
     while ((match = regex.exec(source)) !== null) {
+      const text = match[3].replace(/<strong>(.*?)<\/strong>/g, "$1");
       matches.push({
-        text: match[3],
+        text,
         link: match[2],
         indent: parseInt(match[1]),
       });
@@ -63,7 +64,7 @@ export default function TOC({ content }) {
           key={index}
           className={classes.tocItem}
           style={{
-            paddingLeft: `${(heading.indent - 1) * 20}px`,
+            paddingLeft: `${heading.indent * 10}px`,
           }}
         >
           <a
