@@ -1,7 +1,7 @@
 ---
-title: "next 에러 정리"
+title: "next 트러블 슈팅"
 date: "2024-10-30"
-excerpt: "블로그를 만들면서 있었던 nextjs 에러 정리"
+excerpt: "next 프로젝트를 하면서 있었던 에러 정리"
 image: "images.jpg"
 tags: "next"
 
@@ -10,23 +10,31 @@ isFeatured: true
 
 ## 개요
 
-블로그를 만들면서 있었던 오류 정리
+next 프로젝트를 하면서 있었던 에러 정리
 
-## Error: failed to process byte index 6 is out of bounds of '\ude'
+## 오류 목록
 
-폴더 이름이 `ude...` 로 작성되어서 생긴 오류 \
-폴더이름을 변경하니 해결 \
-참조 https://jsgrow-dev.tistory.com/m/126
+### Failed to process byte index 6 is out of bounds of '\ude'
 
-## Error: Module not found: Can't resolve 'fs'
+**원인**
+udemy 프로젝트를 하는 중, 프로젝트 폴더 이름이 `ude...` 로 작성되어서 생긴 오류
 
+**해결 방안**
+프로젝트의 폴더 이름을 바꾸거나 `ude`로 시작하지 않는 다른 경로로 이동
+
+**참조**
+
+https://stackoverflow.com/questions/77278303/next-js-13-error-byte-index-out-of-bounds-on-npm-run-dev
+
+### Module not found: Can't resolve 'fs'
+
+**원인**
 클라이언트 측에서 `nodejs` 라이브러리를 사용하려고 할 때 발생하는 오류
 
-### 해결방안
-
+**해결 방안**
 루트 디렉토리에 `next.config.js` 생성 후 아래와 같이 설정
 
-**webpack4**
+_webpack4_
 
 ```js
 const nextConfig = {
@@ -46,7 +54,7 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-**webpack5**
+_webpack5_
 
 ```js
 const nextConfig = {
@@ -62,5 +70,6 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-참고링크
-(https://cocoon1787.tistory.com/851)
+**참조**
+
+https://cocoon1787.tistory.com/851

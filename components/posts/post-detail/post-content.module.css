@@ -106,8 +106,8 @@
 
 .contents ul li {
   position: relative;
-  padding-left: var(--size-6);
-  margin: var(--size-1) 0;
+  padding-left: var(--size-3);
+  margin: var(--size-1);
 }
 
 .contents ul li::before {
