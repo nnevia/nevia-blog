@@ -11,11 +11,12 @@ export default function MainNavigation() {
       <nav>
         <ul>
           <li>
-            <Link href='/posts'>Posts</Link>
+            <Link href='/posts'>posts</Link>
           </li>
           <li>
-            <Link href='/contact'>Contact</Link>
+            <Link href='/contact'>contact</Link>
           </li>
+
           <li>
             <Link href='/'>home</Link>
           </li>

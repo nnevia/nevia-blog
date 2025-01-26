@@ -7,4 +7,30 @@ isFeatured: false
 tags: "project"
 ---
 
-## 개요
+# 개요
+
+![deep-valley-hero](deep-valley.jpg)
+**deep-valley 프로젝트 회고 (2차)**
+프로젝트에 대한 상세 정보는 [여기](https://github.com/JJHHYB/deepvalley-front)에서 확인하실 수 있습니다.
+
+# 프로젝트
+
+## 프로젝트 설계
+
+## **기술 스택**
+
+🖥 Frontend
+
+🖥 Backend
+
+🖥 Deployment
+
+## Liked (좋았던 점) 👍
+
+## Learned (배운 점) 📚
+
+## Lacked (부족했던 점) 🤦‍♂️
+
+## Longed For (바라는 점) 😼
+
+## 프로젝트를 마치며

@@ -9,7 +9,7 @@ import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import TOC from "./post-table";
 import dynamic from "next/dynamic";
-
+import React from "react";
 SyntaxHighlighter.registerLanguage("js", js);
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("python", python);
@@ -29,9 +29,10 @@ export default function PostContent(props) {
     ),
     code: ({ children, className }) => {
       if (className) {
-        const codeString = Array.isArray(children) ? children.join("\n") : children.toString();
         const language = className.replace("language-", "");
-
+        const codeString = Array.isArray(children)
+          ? children.map((child) => (child.props ? child.props.children : child)).join("\n")
+          : children.toString();
         return (
           <div>
             <div className={classes.codeHeader}>
@@ -50,7 +51,7 @@ export default function PostContent(props) {
                 marginRight: "1em",
               }}
             >
-              {codeString}
+              {codeString.trim()}
             </SyntaxHighlighter>
           </div>
         );

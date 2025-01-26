@@ -27,21 +27,21 @@
 }
 
 .contents h1 {
-  font-size: var(--size-8);
+  font-size: var(--size-10);
   border-bottom: 1px solid var(--color-grey-300);
   margin: var(--size-16) 0 var(--size-2);
 }
 
 .contents h2 {
-  font-size: var(--size-6);
-  border-left: 4px solid var(--color-primary-300);
-  padding-left: var(--size-4);
-  margin: var(--size-16) 0 var(--size-4);
+  font-size: var(--size-8);
+  margin: var(--size-8) 0 var(--size-1);
 }
 
 .contents h3 {
   font-size: var(--size-6);
-  margin: var(--size-8) 0 var(--size-1);
+  border-left: 4px solid var(--color-primary-300);
+  padding-left: var(--size-4);
+  margin: var(--size-16) 0 var(--size-4);
 }
 
 .contents :global(code:not(pre code)) {
@@ -136,13 +136,13 @@
     padding: var(--size-8);
   }
   .contents h1 {
-    font-size: calc(var(--size-8) * 1.2);
+    font-size: calc(var(--size-10) * 1.1);
   }
   .contents h2 {
-    font-size: calc(var(--size-6) * 1.2);
+    font-size: calc(var(--size-8) * 1.1);
   }
   .contents h3 {
-    font-size: calc(var(--size-6) * 1.2);
+    font-size: calc(var(--size-6) * 1.1);
   }
 
   .contents blockquote {
