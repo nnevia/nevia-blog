@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   border-radius: 8px;
+  min-height: calc(100vh - 156px);
 }
 
 .about h1 {

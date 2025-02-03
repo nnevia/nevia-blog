@@ -35,20 +35,12 @@ export default function PostContent(props) {
           : children.toString();
         return (
           <div>
-            <div className={classes.codeHeader}>
-              <span className={classes.language}>{language}</span>
-            </div>
             <SyntaxHighlighter
-              style={atomDark}
               language={language || "text"}
-              showLineNumbers={true}
+              style={atomDark}
               wrapLines={true}
-              lineNumberStyle={{
-                minWidth: "2.5em",
-                paddingRight: "1em",
-                color: "#666",
-                borderRight: "1px solid #333",
-                marginRight: "1em",
+              customStyle={{
+                fontSize: "14px",
               }}
             >
               {codeString.trim()}

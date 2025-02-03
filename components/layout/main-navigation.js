@@ -14,11 +14,7 @@ export default function MainNavigation() {
             <Link href='/posts'>posts</Link>
           </li>
           <li>
-            <Link href='/contact'>contact</Link>
-          </li>
-
-          <li>
-            <Link href='/'>home</Link>
+            <Link href='/about'>about</Link>
           </li>
           <li>
             <ToggleButton />
