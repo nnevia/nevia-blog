@@ -1,8 +1,8 @@
 import Head from "next/head";
-import classes from "./about.module.css";
+import classes from "./about-form.module.css";
 import { FaGithub, FaEnvelope } from "react-icons/fa";
 
-export default function AboutPage() {
+export default function AboutForm() {
   return (
     <>
       <Head>
@@ -11,10 +11,9 @@ export default function AboutPage() {
       </Head>
       <section className={classes.about}>
         <p>
-          이 블로그는 제 기술과 지식을 공유하기 위해 만들어졌습니다. 여기에서 다양한 주제에 대한 글을 읽고, 제 경험을
-          나누고자 합니다.
+          이 블로그는 Next를 배우고 지식을 공유하기 위해 만들어졌습니다. <br />
+          다양한 주제에 대한 글을 읽고, 제 경험을 나누고자 합니다.
         </p>
-        <br />
         <br />
         <br />
         <p>구본헌 • FrontEnd developer</p>

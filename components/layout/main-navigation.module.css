@@ -20,7 +20,8 @@
 }
 
 .header a {
-  font-size: var(--size-4);
+  font-size: var(--size-2);
+  font-family: "Poppins";
 }
 
 .header a:hover,

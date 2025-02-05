@@ -2,7 +2,7 @@
 title: "Next.js 번들 사이즈 최적화"
 date: "2025-01-05"
 excerpt: Next의 번들 사이즈를 최적화 하는 방법을 알아보자
-# image: deep-valley.jpg
+image: image.webp
 isFeatured: false
 tags: "next"
 ---

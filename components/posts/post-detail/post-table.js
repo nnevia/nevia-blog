@@ -23,7 +23,6 @@ export default function TOC({ content }) {
   }
 
   const HeadingArr = getHeadings(content.content);
-  console.log(HeadingArr);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
