@@ -4,8 +4,11 @@
 h1,
 h2,
 h3,
-p {
-  font-family: "Inter", sans-serif;
+p,
+table,
+li,
+* {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 @font-face {
@@ -62,22 +65,6 @@ body {
   margin: 0;
   background-color: var(--color-secondary);
   color: #b1b0b0;
-}
-
-h1 {
-  font-family: "Noto Sans KR", "Oswald", sans-serif;
-}
-
-h2 {
-  font-family: "Noto Sans KR", "Source Sans Pro", sans-serif;
-}
-
-h3 {
-  font-family: "Noto Sans KR";
-}
-
-p {
-  font-family: "Noto Sans KR", "Source Sans Pro", sans-serif;
 }
 
 a {
