@@ -34,7 +34,7 @@ tags: "project"
 🖥 Backend
 ![back-stack](back-stack.png)
 🖥 CI/CD
-![CI/CD](CICD.png)
+![CICD](CICD.png)
 
 ## 초기 세팅 🔧
 
