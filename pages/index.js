@@ -26,7 +26,7 @@ export default function HomePage(props) {
 //   };
 
 // }
-export function getServerSideProps() {
+export function getStaticProps() {
   return {
     redirect: {
       destination: "/posts",
