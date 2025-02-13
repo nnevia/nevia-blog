@@ -15,14 +15,17 @@ export default function HomePage(props) {
   //   </>
   // );
 }
-export function getStaticProps() {
-  // const featuredPosts = getFeaturedPosts();
-  // return {
-  //   props: {
-  //     posts: featuredPosts,
-  //   },
-  //   revalidate: 600,
-  // };
+// export function getStaticProps() {
+//   const featuredPosts = getFeaturedPosts();
+//   return {
+//     props: {
+//       posts: featuredPosts,
+//     },
+//     revalidate: 600,
+//   };
+
+// }
+export function getServerSideProps() {
   return {
     redirect: {
       destination: "/posts",
