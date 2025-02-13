@@ -2,7 +2,7 @@ import Head from "next/head";
 import FeaturedPosts from "../components/home-page/featured-posts";
 import Hero from "../components/home-page/hero";
 import { getFeaturedPosts } from "../lib/post-util";
-
+import { redirect } from "next";
 export default function HomePage(props) {
   // return (
   //   <>
