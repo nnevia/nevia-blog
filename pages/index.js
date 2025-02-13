@@ -4,23 +4,29 @@ import Hero from "../components/home-page/hero";
 import { getFeaturedPosts } from "../lib/post-util";
 
 export default function HomePage(props) {
-  return (
-    <>
-      <Head>
-        <title>Nevia blog</title>
-        <meta name='description' content="Nevia's blog - The blog of a creative, passionate, and inspiring blogger." />
-      </Head>
-      <Hero />
-      <FeaturedPosts posts={props.posts} />
-    </>
-  );
+  // return (
+  //   <>
+  //     <Head>
+  //       <title>Nevia blog</title>
+  //       <meta name='description' content="Nevia's blog - The blog of a creative, passionate, and inspiring blogger." />
+  //     </Head>
+  //     <Hero />
+  //     <FeaturedPosts posts={props.posts} />
+  //   </>
+  // );
 }
 export function getStaticProps() {
-  const featuredPosts = getFeaturedPosts();
+  // const featuredPosts = getFeaturedPosts();
+  // return {
+  //   props: {
+  //     posts: featuredPosts,
+  //   },
+  //   revalidate: 600,
+  // };
   return {
-    props: {
-      posts: featuredPosts,
+    redirect: {
+      destination: "/posts",
+      permanent: true,
     },
-    revalidate: 600,
   };
 }
