@@ -3,7 +3,7 @@ title: "next 트러블 슈팅"
 date: "2024-10-30"
 excerpt: "next 프로젝트를 하면서 있었던 에러 정리"
 image: "images.jpg"
-tags: "next"
+tags: "error,project"
 
 isFeatured: true
 ---

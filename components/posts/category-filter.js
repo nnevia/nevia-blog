@@ -1,16 +1,25 @@
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import classes from "./category-filter.module.css";
-import { Select } from "@chakra-ui/react";
 
-export default function CategoryFilter({ tags, onSelectTag }) {
+export default function CategoryFilter({ tags, onSelectTag, selectedTag }) {
+  const tagList = ["all", ...new Set(tags.flatMap((tag) => tag.split(",")))];
+
   return (
     <div className={classes.categoryFilter}>
-      <Select placeholder='카테고리 선택' onChange={(e) => onSelectTag(e.target.value)}>
-        {tags.map((tag) => (
-          <option key={tag} value={tag}>
+      <ButtonGroup variant='outline' spacing='5'>
+        {tagList.map((tag) => (
+          <Button
+            key={tag}
+            onClick={() => onSelectTag(tag)}
+            fontWeight={selectedTag === tag ? "bold" : "normal"}
+            border='2px solid'
+            borderRadius='20px'
+            className={selectedTag === tag ? classes.active : ""}
+          >
             {tag}
-          </option>
+          </Button>
         ))}
-      </Select>
+      </ButtonGroup>
     </div>
   );
 }

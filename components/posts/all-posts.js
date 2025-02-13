@@ -11,7 +11,8 @@ export default function AllPosts(props) {
   return (
     <section className={classes.posts}>
       <br />
-      <CategoryFilter tags={props.tags} onSelectTag={setSelectedTag} />
+      <CategoryFilter tags={props.tags} onSelectTag={setSelectedTag} selectedTag={selectedTag} />
+      <br />
       <PostsGrid posts={filteredPosts} />
     </section>
   );
