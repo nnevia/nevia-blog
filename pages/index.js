@@ -7,7 +7,7 @@ export default function HomePage(props) {
   return (
     <>
       <Head>
-        <title>Nevia blog</title>
+        <title>Nevia blog </title>
         <meta name='description' content="Nevia's blog - The blog of a creative, passionate, and inspiring blogger." />
       </Head>
       <Hero />
