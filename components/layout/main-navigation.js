@@ -5,7 +5,7 @@ import ToggleButton from "./toggle-button";
 export default function MainNavigation() {
   return (
     <header className={classes.header}>
-      <Link href='/'>
+      <Link href='/posts'>
         <Logo />
       </Link>
       <nav>
