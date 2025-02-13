@@ -25,7 +25,7 @@ export default function PostItem(props) {
     <li className={classes.post}>
       <Link href={linkPath}>
         <div className={classes.image}>
-          <Image src={imagePath} alt={title} width={320} height={180} layout='responsive' />
+          <Image src={imagePath} alt={title} width={320} height={180} />
           {formattedtags ? <div className={classes.tags}>{formattedtags}</div> : null}
           <div className={classes.overlayContent}>
             <time>{formattedDate}</time>

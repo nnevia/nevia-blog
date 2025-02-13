@@ -11,7 +11,6 @@ tags: "next"
 
 Next.js 애플리케이션의 번들 사이즈가 커지면 성능 저하와 로딩 속도 문제를 초래할 수 있습니다. \
 따라서 번들 크기를 최소화하는 것은 사용자 경험을 향상시키는 중요한 요소입니다. \
-이 글에서는 Next.js에서 번들 사이즈를 줄이는 다양한 방법을 소개합니다.
 
 ## 번들 사이즈 확인하기
 
@@ -131,7 +130,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 ### production 모드에서 개발 코드 제거
 
-*process.env.NODE_ENV*를 활용하여 개발용 코드가 프로덕션 번들에 포함되지 않도록 할 수 있습니다.
+&nbsp; `process.env.NODE_ENV` 를 활용하여 개발용 코드가 프로덕션 번들에 포함되지 않도록 할 수 있습니다.
 
 ```js
 if (process.env.NODE_ENV === "development") {
@@ -150,8 +149,6 @@ ESM(ES Modules)을 지원하는 라이브러리를 사용하면 Tree Shaking이 
 ```
 
 ## 마무리
-
-Next.js에서 번들 사이즈를 줄이는 방법은 여러 가지가 있으며, 이를 통해 성능을 향상시키고 사용자 경험을 개선할 수 있습니다.
 
 번들 크기 분석 (@next/bundle-analyzer 활용)
 
