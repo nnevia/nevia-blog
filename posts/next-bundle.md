@@ -10,21 +10,20 @@ tags: "next"
 ## 개요
 
 Next.js 애플리케이션의 번들 사이즈가 커지면 성능 저하와 로딩 속도 문제를 초래할 수 있습니다. \
-따라서 번들 크기를 최소화하는 것은 사용자 경험을 향상시키는 중요한 요소입니다. \
+따라서 번들 크기를 최소화하는 것은 UX/UI의 중요한 요소입니다.
 
 ## 번들 사이즈 확인하기
 
 Next.js는 빌드 시 next build 명령어를 실행하면 각 페이지의 번들 사이즈를 분석하여 제공합니다.
-
 빌드가 완료되면 터미널에서 각 페이지의 번들 크기를 확인할 수 있습니다. 특히 First Load JS 크기를 줄이는 것이 중요합니다.
-
 또한, @next/bundle-analyzer 패키지를 사용하여 시각적으로 번들 내용을 분석할 수도 있습니다.
 
 ```js
 npm install @next/bundle-analyzer
 ```
 
-next.config.js 파일을 수정하여 분석 기능을 활성화할 수 있습니다.
+\
+&nbsp; `next.config.js` 파일을 수정하여 분석 기능을 활성화할 수 있습니다.
 
 ```js
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -34,7 +33,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = withBundleAnalyzer({});
 ```
 
-\
 \
 이제 다음 명령어를 실행하면 번들 분석 페이지를 확인할 수 있습니다.
 
@@ -49,7 +47,7 @@ ANALYZE=true next build
 
 ### Moment.js 대체
 
-moment.js는 매우 크므로 date-fns 또는 dayjs 같은 가벼운 라이브러리로 교체하는 것이 좋습니다.
+moment.js는 매우 크므로 `date-fns` 또는 `dayjs` 같은 가벼운 라이브러리로 교체하는 것이 좋습니다.
 
 `npm install date-fns`
 
@@ -62,7 +60,7 @@ console.log(format(date, "yyyy-MM-dd"));
 
 ### Lodash 최적화
 
-lodash를 사용할 경우 필요한 기능만 개별적으로 임포트하면 번들 크기를 줄일 수 있습니다.
+&nbsp;`lodash`를 사용할 경우 필요한 기능만 개별적으로 임포트하면 번들 크기를 줄일 수 있습니다.
 
 ```js
 import debounce from "lodash/debounce";
@@ -74,7 +72,7 @@ Next.js는 기본적으로 코드 스플리팅을 지원하지만, 아래 방법
 
 ### 동적 로딩 (next/dynamic)
 
-next/dynamic을 사용하면 특정 컴포넌트를 필요할 때만 로드할 수 있습니다.
+&nbsp;`next/dynamic`을 사용하면 특정 컴포넌트를 필요할 때만 로드할 수 있습니다.
 
 ```js
 const HeavyComponent = dynamic(() => import("../components/HeavyComponent"), {
@@ -140,7 +138,7 @@ if (process.env.NODE_ENV === "development") {
 
 ### Tree Shaking 활성화
 
-ESM(ES Modules)을 지원하는 라이브러리를 사용하면 Tree Shaking이 활성화됩니다. *package.json*에서 *sideEffects: false*를 추가하면 불필요한 코드가 제거됩니다.
+ESM(ES Modules)을 지원하는 라이브러리를 사용하면 Tree Shaking이 활성화됩니다. `package.json`에서 `sideEffects: false`를 추가하면 불필요한 코드가 제거됩니다.
 
 ```js
 {
