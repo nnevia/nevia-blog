@@ -24,7 +24,7 @@ export default function PostContent(props) {
   const customRenderers = {
     img: ({ alt, src, width, height }) => (
       <div className={classes.image}>
-        <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={width || 600} height={height || 300} />
+        <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />
       </div>
     ),
     code: ({ children, className }) => {
