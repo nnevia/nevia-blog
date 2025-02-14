@@ -75,6 +75,7 @@ https://cocoon1787.tistory.com/851
 ### Image 컴포넌트의 layout 속성오류
 
 ![error1](error1.jpg)
+
 **원인**
 Next.js 13 이상에서 `<Image>` 컴포넌트를 사용할 때 `layout` 속성이 더 이상 지원되지 않는다는 경고문
 찾아보니 `Image`컴포넌트에 `layout`속성이 추가되어 있었다😂
