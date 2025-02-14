@@ -7,7 +7,7 @@ export default function AllPostsPage(props) {
     <>
       <Head>
         <title>Nevia Blog - All Posts</title>
-        <meta name='viewport' content='A list' />
+        <meta name='viewport ' content='A list' />
       </Head>
       <AllPosts posts={props.posts} tags={props.tags} />
     </>
