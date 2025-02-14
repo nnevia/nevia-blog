@@ -1,6 +1,6 @@
 ---
 title: "algorithm-조이스틱"
-date: "2024-03-21"
+date: "2024-04-12"
 excerpt: 알고리즘 풀이
 image: thumbnail.png
 isFeatured: false
