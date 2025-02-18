@@ -1,7 +1,7 @@
 .container {
   position: relative;
   display: flex;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   gap: 2rem;
   min-height: calc(100vh - 156px);
@@ -46,9 +46,15 @@
 }
 
 .contents :global(code:not(pre code)) {
-  background-color: var(--color-grey-400);
+  background-color: var(--color-grey-500);
   padding: 0.1em 0.3em;
   border-radius: 3px;
+}
+
+.contents code {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: var(--size-4);
 }
 
 .contents a {
@@ -174,3 +180,5 @@
   width: 100%;
   max-width: 600px;
 }
+
+/* 커스텀 스타일 */

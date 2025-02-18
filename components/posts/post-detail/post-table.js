@@ -3,26 +3,29 @@ import classes from "./post-table.module.css";
 
 export default function TOC({ content }) {
   const [activeId, setActiveId] = useState("");
+
   function getHeadings(source) {
-    const regex = /<h([1-3])[^>]*id=["']?([^"'>]*)["']?[^>]*>(.*?)<\/h[1-3]>/gi;
+    const regex = /<(h[2-3])[^>]*>(.*?)<\/\1>/gi;
     const matches = [];
     let match;
     while ((match = regex.exec(source)) !== null) {
-      const text = match[3].replace(/<strong>(.*?)<\/strong>/g, "$1");
-      const safeId = match[2]
+      const text = match[2].replace(/<strong>(.*?)<\/strong>/g, "$1");
+      const tag = match[1];
+      const safeId = text
         .trim()
         .replace(/\s+/g, "-")
-        .replace(/[^a-zA-Z0-9가-힣-_]/g, "");
+        .replace(/[^\w가-힣-]/g, "");
+
       matches.push({
         text,
-        link: match[2],
-        indent: parseInt(match[1]),
+        link: safeId,
+        tag,
       });
     }
     return matches;
   }
 
-  const HeadingArr = getHeadings(content.content);
+  const HeadingArr = getHeadings(content);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,7 +38,6 @@ export default function TOC({ content }) {
       },
       { rootMargin: "0px 0px -50% 10px", threshold: 1.0 }
     );
-
     HeadingArr.forEach((heading) => {
       const element = document.getElementById(heading.link);
       if (element) {
@@ -67,7 +69,7 @@ export default function TOC({ content }) {
           key={index}
           className={classes.tocItem}
           style={{
-            paddingLeft: `${heading.indent * 10}px`,
+            paddingLeft: `${(parseInt(heading.tag[1]) - 1) * 10}px`,
           }}
         >
           <a

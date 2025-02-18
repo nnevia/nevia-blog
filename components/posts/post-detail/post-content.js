@@ -1,77 +1,56 @@
 import PostHeader from "./post-header";
 import classes from "./post-content.module.css";
-import Image from "next/image";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
-import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
-import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
-import python from "react-syntax-highlighter/dist/cjs/languages/prism/python";
-import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
+import React, { useEffect } from "react";
+import sanitizeHtml from "sanitize-html";
 import TOC from "./post-table";
-import dynamic from "next/dynamic";
-import React from "react";
-SyntaxHighlighter.registerLanguage("js", js);
-SyntaxHighlighter.registerLanguage("css", css);
-SyntaxHighlighter.registerLanguage("python", python);
-SyntaxHighlighter.registerLanguage("tsx", tsx);
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
 
-const Markdown = dynamic(() => import("markdown-to-jsx"), { ssr: false });
-
-export default function PostContent(props) {
-  const { post, content } = props;
+export default function PostContent({ post, content }) {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
-  const customRenderers = {
-    img: ({ alt, src, width, height }) => (
-      <div className={classes.image}>
-        <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />
-      </div>
-    ),
-    code: ({ children, className }) => {
-      if (className) {
-        const language = className.replace("language-", "");
-        const codeString = Array.isArray(children)
-          ? children.map((child) => (child.props ? child.props.children : child)).join("\n")
-          : children.toString();
-        return (
-          <div>
-            <SyntaxHighlighter
-              language={language || "text"}
-              style={atomDark}
-              wrapLines={true}
-              customStyle={{
-                fontSize: "14px",
-              }}
-            >
-              {codeString.trim()}
-            </SyntaxHighlighter>
-          </div>
-        );
-      } else {
-        return <span className={classes.inlineCode}>{children}</span>;
-      }
+  const cleanHtml = sanitizeHtml(post.content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "pre", "code"]),
+    allowedAttributes: {
+      a: ["href", "name", "target"],
+      img: ["src"],
+      li: ["class"],
+      code: ["class"],
     },
-  };
+    transformTags: {
+      img: (tagName, attribs) => {
+        return {
+          tagName: "img",
+          attribs: {
+            src: `/images/posts/${post.slug}/${attribs.src}`,
+            alt: attribs.alt || "",
+            width: "600",
+            height: "300",
+          },
+        };
+      },
+      pre: (tagName, attribs) => {
+        return {
+          tagName: "pre",
+          attribs: { class: "hljs" },
+        };
+      },
+    },
+  });
 
+  useEffect(() => {
+    document.querySelectorAll("pre code").forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  }, [cleanHtml]);
   return (
     <div className={classes.container}>
       <article className={classes.content}>
         <PostHeader title={post.title} image={imagePath} />
-        {/* 이미지 스켈레톤 추가 자리 */}
         <div className={classes.contents}>
-          <Markdown
-            options={{
-              overrides: customRenderers,
-              forceBlock: true,
-            }}
-          >
-            {post.content}
-          </Markdown>
+          <div dangerouslySetInnerHTML={{ __html: cleanHtml }} />
         </div>
       </article>
-      <div className={classes.tocWrapper}>
-        <TOC content={content} />
-      </div>
     </div>
   );
 }

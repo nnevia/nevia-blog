@@ -22,8 +22,7 @@ Next.js는 빌드 시 next build 명령어를 실행하면 각 페이지의 번�
 npm install @next/bundle-analyzer
 ```
 
-\
-&nbsp; `next.config.js` 파일을 수정하여 분석 기능을 활성화할 수 있습니다.
+`next.config.js` 파일을 수정하여 분석 기능을 활성화할 수 있습니다.
 
 ```js
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -37,7 +36,6 @@ module.exports = withBundleAnalyzer({});
 이제 다음 명령어를 실행하면 번들 분석 페이지를 확인할 수 있습니다.
 
 ```js
-
 ANALYZE=true next build
 ```
 
@@ -141,9 +139,7 @@ if (process.env.NODE_ENV === "development") {
 ESM(ES Modules)을 지원하는 라이브러리를 사용하면 Tree Shaking이 활성화됩니다. `package.json`에서 `sideEffects: false`를 추가하면 불필요한 코드가 제거됩니다.
 
 ```js
-{
 "sideEffects": false
-}
 ```
 
 ## 마무리

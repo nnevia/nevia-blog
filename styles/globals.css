@@ -6,11 +6,12 @@ h2,
 h3,
 p,
 table,
-li,
-* {
+li {
   font-family: "Noto Sans KR", sans-serif;
 }
-
+code {
+  font-size: small;
+}
 @font-face {
   font-family: "Morganite";
   src: url("/fonts/Morganite/Morganite-Black.ttf") format("truetype");
