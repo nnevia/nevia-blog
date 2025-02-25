@@ -2,7 +2,7 @@
   display: flex;
   gap: 11px;
   padding: 10px;
-  border-radius: 8px;
+  /* background-color: gray; */
 }
 
 .active {
@@ -11,7 +11,7 @@
 
 .button {
   padding: 8px 20px;
-  border: 2px solid; /* 기본 테두리 */
-  border-radius: 20px; /* 둥근 테두리 */
+  border: 2px solid;
+  border-radius: 20px;
   transition: all 0.3s ease;
 }
