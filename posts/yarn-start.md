@@ -1,7 +1,7 @@
 ---
 title: "Yarn 설치 및 사용법"
 date: "2024-11-26"
-excerpt: Yarn의 설치 방법과 사용법을 알아봅니다.
+excerpt: Yarn의 설치 방법과 사용법을 알아보자.
 image: 2.png
 isFeatured: false
 tags: "study"

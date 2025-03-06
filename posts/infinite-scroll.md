@@ -9,7 +9,7 @@ tags: "react,project"
 
 # 개요
 
-&nbsp; [2차 팀 프로젝트](https://github.com/JJHHYB/deepvalley-front)에서 급하게 Infinite Scroll을 적용해야 하는 상황이 있었고, 당시엔 깊이 고민하지 못한 채 구현했다. 이번 포스팅에서는 무한 스크롤의 개념과 다양한 구현 방법, 그리고 성능 최적화 방안까지 상세히 살펴보려고 한다.
+[2차 팀 프로젝트](https://github.com/JJHHYB/deepvalley-front)에서 급하게 Infinite Scroll을 적용해야 하는 상황이 있었고, 당시엔 깊이 고민하지 못한 채 구현했다. 이번 포스팅에서는 무한 스크롤의 개념과 다양한 구현 방법, 그리고 성능 최적화 방안까지 상세히 살펴보려고 한다.
 
 # Infinite Scroll이란?
 

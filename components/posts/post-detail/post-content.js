@@ -6,11 +6,11 @@ import TOC from "./post-table";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 
-export default function PostContent({ post, content }) {
+export default function PostContent({ post }) {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   const cleanHtml = sanitizeHtml(post.content, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "pre", "code"]),
+    allowedTags: [...sanitizeHtml.defaults.allowedTags, "img", "pre", "code"],
     allowedAttributes: {
       a: ["href", "name", "target"],
       img: ["src"],
@@ -40,7 +40,7 @@ export default function PostContent({ post, content }) {
 
   useEffect(() => {
     document.querySelectorAll("pre code").forEach((block) => {
-      hljs.highlightBlock(block);
+      hljs.highlightElement(block);
     });
   }, [cleanHtml]);
   return (
