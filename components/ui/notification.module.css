@@ -13,7 +13,7 @@
   left: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  z-index: 9999; /* z-index 값을 높여서 모달보다 앞에 표시되도록 함 */
+  z-index: 99;
 }
 
 .notification h2 {

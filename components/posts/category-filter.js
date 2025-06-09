@@ -11,18 +11,19 @@ export default function CategoryFilter({ tags, onSelectTag, selectedTag }) {
           <Button
             key={tag}
             onClick={() => onSelectTag(tag)}
-            fontWeight={selectedTag === tag ? "bold" : "normal"}
             bg={selectedTag === tag ? "#80848d" : ""}
             borderRadius='15px'
+            color={selectedTag === tag ? "" : ""}
             border=''
             className={selectedTag === tag ? classes.active : ""}
             _hover={{
               bg: "#80848d",
-              boxShadow: `0 4px 15px rgba(128, 132, 141, 0.6)`,
+              transform: "translateY(-2px) scale(1.04)",
+              opacity: "1",
+              boxShadow: "0 4px 12px 0 rgba(128, 132, 141, 0.10)",
             }}
             _active={{
               bg: "#80848d",
-              boxShadow: `0 4px 15px rgba(128, 132, 141, 0.6)`,
             }}
           >
             {tag}

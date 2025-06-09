@@ -2,11 +2,10 @@
   display: flex;
   gap: 11px;
   padding: 10px;
-  /* background-color: gray; */
 }
 
 .active {
-  font-weight: bold;
+  color: black;
 }
 
 .button {

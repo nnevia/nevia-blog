@@ -17,6 +17,9 @@ export default function MainNavigation() {
             <Link href='/about'>about</Link>
           </li>
           <li>
+            <Link href='/play'>play</Link>
+          </li>
+          <li>
             <ToggleButton />
           </li>
         </ul>
