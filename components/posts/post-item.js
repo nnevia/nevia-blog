@@ -28,7 +28,7 @@ export default function PostItem(props) {
           <Image src={imagePath} alt={title} width={320} height={180} />
           {formattedtags ? <div className={classes.tags}>{formattedtags}</div> : null}
           <div className={classes.overlayContent}>
-            <time>{formattedDate}</time>
+            {/* <time>{formattedDate}</time> */}
             <p>{excerpt}</p>
           </div>
         </div>
