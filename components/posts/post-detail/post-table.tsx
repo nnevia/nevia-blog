@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import classes from "./post-table.module.css";
 
-export default function TOC({ content }) {
+export default function TOC({ content }: { content: string }) {
   const [activeId, setActiveId] = useState("");
 
-  function getHeadings(source) {
+  function getHeadings(source: string) {
     const regex = /<(h[2-3])[^>]*>(.*?)<\/\1>/gi;
-    const matches = [];
-    let match;
+    const matches: Array<{ text: string; link: string; tag: string }> = [];
+    let match: RegExpExecArray | null;
     while ((match = regex.exec(source)) !== null) {
       const text = match[2].replace(/<strong>(.*?)<\/strong>/g, "$1");
       const tag = match[1];
@@ -32,7 +32,7 @@ export default function TOC({ content }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+            setActiveId((entry.target as HTMLElement).id);
           }
         });
       },
@@ -50,15 +50,12 @@ export default function TOC({ content }) {
     };
   }, [HeadingArr]);
 
-  const handleLinkClick = (e) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const href = e.target.getAttribute("href").substring(1);
+    const href = (e.target as HTMLAnchorElement).getAttribute("href")!.substring(1);
     const element = document.getElementById(href);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 

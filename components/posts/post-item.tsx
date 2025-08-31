@@ -2,7 +2,18 @@ import Link from "next/link";
 import classes from "./post-item.module.css";
 import Image from "next/image";
 
-export default function PostItem(props) {
+type PostItemProps = {
+  post: {
+    title: string;
+    image: string;
+    excerpt: string;
+    date: string;
+    slug: string;
+    tags?: string;
+  };
+};
+
+export default function PostItem(props: PostItemProps) {
   const { title, image, excerpt, date, slug, tags } = props.post;
   let formattedtags;
   if (tags) {

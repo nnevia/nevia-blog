@@ -1,9 +1,11 @@
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST requests allowed" });
   }
 
-  const { text } = req.body;
+  const { text } = req.body as { text?: string };
   try {
     const response = await fetch(
       "https://api-inference.huggingface.co/models/nlptown/bert-base-multilingual-uncased-sentiment",
@@ -17,17 +19,20 @@ export default async function handler(req, res) {
       }
     );
 
-    // 응답 코드 실패 처리 (4xx, 5xx)
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(`API 요청 실패: ${response.status} ${response.statusText}\n${errorText}`);
     }
 
-    const result = await response.json();
-    const topLabel = result[0].reduce((a, b) => (b.score > a.score ? b : a), result[0][0]).label[0];
+    const result = (await response.json()) as Array<Array<{ label: string; score: number }>>;
+    const topLabel = result[0].reduce((a, b) => (b.score > a.score ? b : a), result[0][0]).label[0] as unknown as
+      | 1
+      | 2
+      | 3
+      | 4
+      | 5;
 
-    // 감정에 따른 음악 매핑
-    const musicMap = {
+    const musicMap: Record<1 | 2 | 3 | 4 | 5, { text: string; youtube: string[] }> = {
       5: {
         text: "😄 매우 긍정적인 감정 (기쁨, 사랑, 희망)",
         youtube: [
@@ -71,11 +76,10 @@ export default async function handler(req, res) {
     };
 
     const selectedMusic = musicMap[topLabel] || {
-      text: 3,
+      text: "😐 중립적인 감정 (평범함, 차분함)",
       youtube: ["https://www.youtube.com/embed/2Vv-BfVoq4g"],
     };
 
-    // 랜덤으로 유튜브 링크 선택
     const randomYoutube = selectedMusic.youtube[Math.floor(Math.random() * selectedMusic.youtube.length)];
 
     res.status(200).json({
@@ -84,7 +88,7 @@ export default async function handler(req, res) {
         youtube: randomYoutube,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("API 오류:", error.message);
     res.status(500).json({ error: "서버 오류" });
   }

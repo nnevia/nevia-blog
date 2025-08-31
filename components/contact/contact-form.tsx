@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import classes from "./contact-form.module.css";
 import Notification from "../ui/notification";
 
-async function sendContactData(contactDetails) {
+async function sendContactData(contactDetails: { email: string; name: string; message: string }) {
   const response = await fetch("/api/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -18,8 +18,8 @@ export default function ContactForm() {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredName, setEnteredName] = useState("");
   const [enteredMessage, setEnteredMessage] = useState("");
-  const [requestStatus, setRequestStatus] = useState(); // 'pending', 'success', 'error'
-  const [requestError, setRequestError] = useState();
+  const [requestStatus, setRequestStatus] = useState<"pending" | "success" | "error" | null>();
+  const [requestError, setRequestError] = useState<string | null>();
 
   useEffect(() => {
     if (requestStatus === "success" || requestStatus === "error") {
@@ -32,7 +32,7 @@ export default function ContactForm() {
     }
   }, [requestStatus]);
 
-  async function sendMessageHandler(event) {
+  async function sendMessageHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setRequestStatus("pending");
@@ -47,13 +47,15 @@ export default function ContactForm() {
       setEnteredEmail("");
       setEnteredMessage("");
       setEnteredName("");
-    } catch (error) {
+    } catch (error: any) {
       setRequestError(error.message);
       setRequestStatus("error");
     }
   }
 
-  let notification;
+  let notification:
+    | { status: "pending" | "success" | "error"; title: string; message: string | null | undefined }
+    | undefined;
   if (requestStatus === "pending") {
     notification = {
       status: "pending",

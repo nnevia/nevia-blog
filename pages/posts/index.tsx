@@ -1,8 +1,9 @@
 import Head from "next/head";
 import AllPosts from "../../components/posts/all-posts";
 import { getAllPosts, getAllTags } from "../../lib/post-util";
+import type { InferGetStaticPropsType } from "next";
 
-export default function AllPostsPage(props) {
+export default function AllPostsPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -22,5 +23,5 @@ export function getStaticProps() {
       posts: allPosts,
       tags: allTags,
     },
-  };
+  } as const;
 }

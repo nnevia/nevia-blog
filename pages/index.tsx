@@ -2,8 +2,9 @@ import Head from "next/head";
 import FeaturedPosts from "../components/home-page/featured-posts";
 import Hero from "../components/home-page/hero";
 import { getFeaturedPosts } from "../lib/post-util";
+import type { InferGetStaticPropsType } from "next";
 
-export default function HomePage(props) {
+export default function HomePage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -15,6 +16,7 @@ export default function HomePage(props) {
     </>
   );
 }
+
 export function getStaticProps() {
   const featuredPosts = getFeaturedPosts();
   return {
@@ -22,5 +24,5 @@ export function getStaticProps() {
       posts: featuredPosts,
     },
     revalidate: 600,
-  };
+  } as const;
 }

@@ -1,8 +1,16 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import classes from "./category-filter.module.css";
 
-export default function CategoryFilter({ tags, onSelectTag, selectedTag }) {
-  const tagList = ["all", ...new Set(tags.flatMap((tag) => tag.split(",")))];
+export default function CategoryFilter({
+  tags,
+  onSelectTag,
+  selectedTag,
+}: {
+  tags: string[];
+  onSelectTag: (tag: string) => void;
+  selectedTag: string;
+}) {
+  const tagList = ["all", ...new Set(tags.flatMap((tag) => tag.split(",")))] as string[];
 
   return (
     <div className={classes.categoryFilter}>

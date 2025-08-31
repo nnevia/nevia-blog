@@ -2,11 +2,20 @@ import PostHeader from "./post-header";
 import classes from "./post-content.module.css";
 import React, { useEffect } from "react";
 import sanitizeHtml from "sanitize-html";
-import TOC from "./post-table";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 
-export default function PostContent({ post }) {
+interface PostContentProps {
+  post: {
+    title: string;
+    image: string;
+    content: string;
+    slug: string;
+    [key: string]: any;
+  };
+}
+
+export default function PostContent({ post }: PostContentProps) {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   const cleanHtml = sanitizeHtml(post.content, {
@@ -40,7 +49,7 @@ export default function PostContent({ post }) {
 
   useEffect(() => {
     document.querySelectorAll("pre code").forEach((block) => {
-      hljs.highlightElement(block);
+      hljs.highlightElement(block as HTMLElement);
     });
   }, [cleanHtml]);
   return (

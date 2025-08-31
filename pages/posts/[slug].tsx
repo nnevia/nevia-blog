@@ -1,20 +1,21 @@
 import PostContent from "../../components/posts/post-detail/post-content";
 import { addIdsToHeaders, getPostData, getpostFiles } from "../../lib/post-util";
 import Head from "next/head";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
-export default function PostDetailPage(props) {
+export default function PostDetailPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
         <title>{props.post.title}</title>
         <meta name='description' content={props.post.excerpt} />
       </Head>
-      <PostContent post={props.content} content={props.content} />
+      <PostContent post={props.content} />
     </>
   );
 }
 
-export function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = () => {
   const postFileNames = getpostFiles();
   const paths = postFileNames.map((fileName) => ({
     params: {
@@ -24,13 +25,13 @@ export function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
-}
+};
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
-  const { slug } = params;
+  const { slug } = params as { slug: string };
   const postData = getPostData(slug);
   const content = await addIdsToHeaders(postData);
   return {
@@ -39,5 +40,5 @@ export async function getStaticProps(context) {
       content,
     },
     revalidate: 600,
-  };
-}
+  } as const;
+};

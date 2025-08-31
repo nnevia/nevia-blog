@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 import "../styles/globals.css";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "../theme";
+import type { AppProps } from "next/app";
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [pageTransition, setPageTransition] = useState(false);
 

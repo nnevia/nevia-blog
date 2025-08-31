@@ -7,18 +7,27 @@ import anchor from "markdown-it-anchor";
 const postDirectory = path.join(process.cwd(), "posts");
 
 export function getpostFiles() {
-  return fs.readdirSync(postDirectory); // 폴더 내 모든 파일과 서브폴더 이름을 배열로 반환
+  return fs.readdirSync(postDirectory);
 }
 
-export function getPostData(postIdentifier) {
-  const postSlug = postIdentifier.replace(/\.md$/, ""); // 파일명에서 .md 확장자를 제거
+export type PostFrontMatter = {
+  title: string;
+  date: string;
+  excerpt?: string;
+  isFeatured?: boolean;
+  tags?: string;
+  [key: string]: any;
+};
+
+export function getPostData(postIdentifier: string) {
+  const postSlug = postIdentifier.replace(/\.md$/, "");
   const filePath = path.join(postDirectory, `${postSlug}.md`);
   const fileContent = fs.readFileSync(filePath, "utf-8");
 
-  const { data, content } = matter(fileContent); // 마크다운 텍스트를 문자열로 반환
-  const postData = {
+  const { data, content } = matter(fileContent);
+  const postData: PostFrontMatter & { slug: string; content: string } = {
     slug: postSlug,
-    ...data,
+    ...(data as PostFrontMatter),
     content,
   };
   return postData;
@@ -35,7 +44,10 @@ export function getAllPosts() {
 
 export function getAllTags() {
   const allPosts = getAllPosts();
-  const allTags = allPosts.map((item) => item.tags).filter((tag, index, arr) => arr.indexOf(tag) === index);
+  const allTags = allPosts
+    .map((item) => item.tags)
+    .filter((tag): tag is string => Boolean(tag))
+    .filter((tag, index, arr) => arr.indexOf(tag) === index);
   return allTags;
 }
 
@@ -45,34 +57,14 @@ export function getFeaturedPosts() {
   return featuredPosts;
 }
 
-// export async function addIdsToHeaders(markdownData) {
-//   const processedContent = await remark()
-//     .use(remarkHtml, {
-//       sanitize: false, // HTML 태그 허용
-//       allowDangerousHtml: true,
-//     }) // Markdown -> HTML
-//     .use(slug) // 각 헤더에 id(slug) 추가
-//     .use(autolinkHeadings, { behavior: "wrap" }) // (선택) 헤더에 링크 추가
-//     .process(markdownData.content);
-
-//   console.log(processedContent.toString());
-
-//   // 기존 데이터에 변환된 content를 덮어씌움
-//   return {
-//     ...markdownData, // 기존 키-값 데이터 유지
-//     content: processedContent.toString(), // HTML 변환된 내용
-//   };
-// }
-
-// MarkdownIt으로 수정 버전
-export async function addIdsToHeaders(markdownData) {
+export async function addIdsToHeaders(markdownData: { content: string }) {
   const md = new MarkdownIt({
     html: true,
     xhtmlOut: false,
     breaks: true,
     linkify: true,
   }).use(anchor, {
-    slugify: (s) =>
+    slugify: (s: string) =>
       String(s)
         .trim()
         .toLowerCase()
@@ -83,7 +75,7 @@ export async function addIdsToHeaders(markdownData) {
     tabIndex: false,
   });
 
-  let content = md.render(markdownData.content);
+  const content = md.render(markdownData.content);
 
   return {
     ...markdownData,

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import classes from "./music-play.module.css";
 
+type EmotionResult = { text: string; youtube: string } | null;
+
 export default function MusicPlay() {
   const [text, setText] = useState("");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<EmotionResult>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {

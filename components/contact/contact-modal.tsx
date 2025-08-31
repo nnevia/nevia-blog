@@ -9,7 +9,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import ContactForm from "./contact-form";
-export default function ContactModal({ isOpen, onClose }) {
+
+export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
